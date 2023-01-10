@@ -1,6 +1,7 @@
-from flask import Flask, request, session 
+from flask import Flask, request, session
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -12,11 +13,19 @@ def index():
     return page
 
 # Login processing will need to integrate IAP
-@app.route('/login')
-def login():
-    pass
 
-#Secondary page after login to allow creation of 60min token for auth with AR
+
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        username = request.form["name"]
+        password = request.form["password"]
+        if username == "kevin" and password == "password123":
+            return "<h1>get token</h1>"
+
+        # Secondary page after login to allow creation of 60min token for auth with AR
+
+
 @app.route('/request_token')
 def request_token():
     pass
